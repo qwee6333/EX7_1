@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
     private TextView tvConMenu;
+    private final int Page2_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,19 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.context_menu,menu);
     }
 
+
+
+
+    }
     Intent intent =new Intent();
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.sharedPrefer:
-                intent.setClass(MainActivity.this,SharedPreferences.class);
+                intent.setClass(MainActivity.this,Page2.class);
+                startActivityForResult(intent,Page2_REQUEST);
+
                 break;
             case R.id.clear:
                 finish();
@@ -53,6 +61,14 @@ public class MainActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode != Page2_REQUEST)
+            return;
+        
     }
 
     @Override
